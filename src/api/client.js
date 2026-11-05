@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://api-school.harishankargroup.com',
+  baseURL: 'https://api-school.harishankargroup.com/api',
   headers: { 'Content-Type': 'application/json' }
 });
 
