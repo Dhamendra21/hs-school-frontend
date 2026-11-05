@@ -7,11 +7,11 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'https://api-school.harishankargroup.com',
+        target: 'https://api-school.harishankargroup.com/api',
         changeOrigin: true
       },
       '/uploads': {
-        target: 'https://api-school.harishankargroup.com',
+        target: 'https://api-school.harishankargroup.com/uploads',
         changeOrigin: true
       }
     }
