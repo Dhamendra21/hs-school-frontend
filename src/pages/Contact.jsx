@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api/client';
 import PageHero from '../components/PageHero';
+import { FaSchool, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaWhatsapp, FaClock, FaCheckCircle } from 'react-icons/fa';
 
 export default function Contact() {
   const [site, setSite] = useState({});
@@ -39,19 +40,19 @@ export default function Contact() {
               <span className="section-label">Get in Touch</span>
               <h2 className="section-title" style={{ textAlign: 'left', marginBottom: 24 }}>We'd Love to Hear From You</h2>
               <div className="contact-info-list">
-                <div className="contact-info-item"><div className="contact-info-icon">🏫</div><div><h4>School</h4><p>Pt. Harishankar Shukla English Medium Higher Secondary School</p></div></div>
-                <div className="contact-info-item"><div className="contact-info-icon">📍</div><div><h4>Address</h4><p>{site.address || 'Shankar Nagar, Raipur'}</p></div></div>
-                <div className="contact-info-item"><div className="contact-info-icon">📞</div><div><h4>Phone</h4><p>{site.phone || '+91-9516011227'}</p></div></div>
-                <div className="contact-info-item"><div className="contact-info-icon">✉️</div><div><h4>Email</h4><p>{site.email || 'hsems51@gmail.com'}</p></div></div>
-                <div className="contact-info-item"><div className="contact-info-icon">💬</div><div><h4>WhatsApp</h4><p><a href="https://wa.me/919516011227" target="_blank" rel="noreferrer" style={{ color: '#25d366', fontWeight: 600 }}>+91-9516011227 (Enquire on WhatsApp)</a></p></div></div>
-                <div className="contact-info-item"><div className="contact-info-icon">🕐</div><div><h4>Office Hours</h4><p>{site.timings || 'Mon–Sat 8:00 AM – 2:00 PM'}</p></div></div>
+                <div className="contact-info-item"><div className="contact-info-icon"><FaSchool style={{ color: 'var(--royal-blue)' }} /></div><div><h4>School</h4><p>Pt. Harishankar Shukla English Medium Higher Secondary School</p></div></div>
+                <div className="contact-info-item"><div className="contact-info-icon"><FaMapMarkerAlt style={{ color: 'var(--gold)' }} /></div><div><h4>Address</h4><p>{site.address || 'Shankar Nagar, Raipur'}</p></div></div>
+                <div className="contact-info-item"><div className="contact-info-icon"><FaPhoneAlt style={{ color: '#0284c7' }} /></div><div><h4>Phone</h4><p>{site.phone || '+91-9516011227'}</p></div></div>
+                <div className="contact-info-item"><div className="contact-info-icon"><FaEnvelope style={{ color: '#dc2626' }} /></div><div><h4>Email</h4><p>{site.email || 'hsems51@gmail.com'}</p></div></div>
+                <div className="contact-info-item"><div className="contact-info-icon"><FaWhatsapp style={{ color: '#25d366' }} /></div><div><h4>WhatsApp</h4><p><a href="https://wa.me/919516011227" target="_blank" rel="noreferrer" style={{ color: '#25d366', fontWeight: 600 }}>+91-9516011227 (Enquire on WhatsApp)</a></p></div></div>
+                <div className="contact-info-item"><div className="contact-info-icon"><FaClock style={{ color: '#64748b' }} /></div><div><h4>Office Hours</h4><p>{site.timings || 'Mon–Sat 8:00 AM – 2:00 PM'}</p></div></div>
               </div>
             </div>
             <div className="contact-form">
               <h3 style={{ marginBottom: 18, color: 'var(--navy-mid)' }}>Send a Message</h3>
               {submitted ? (
                 <div style={{ padding: 24, background: '#dcfce7', color: '#166534', borderRadius: 12, textAlign: 'center' }}>
-                  <h4 style={{ fontSize: '1.1rem', marginBottom: 6 }}>✅ Message Sent Successfully!</h4>
+                  <h4 style={{ fontSize: '1.1rem', marginBottom: 6, display: 'inline-flex', alignItems: 'center', gap: 6 }}><FaCheckCircle /> Message Sent Successfully!</h4>
                   <p style={{ fontSize: '0.9rem' }}>Thank you for reaching out. Our team will get back to you shortly.</p>
                   <button onClick={() => setSubmitted(false)} className="btn btn-navy" style={{ marginTop: 14 }}>Send Another Message</button>
                 </div>

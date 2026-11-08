@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import api from '../api/client';
 import { imageSrc } from '../api/upload';
 import PageHero from '../components/PageHero';
+import { FaGraduationCap, FaHourglassHalf, FaBookOpen } from 'react-icons/fa';
 
 export default function Faculty() {
   const [list, setList] = useState([]);
@@ -90,19 +91,19 @@ export default function Faculty() {
                 <div style={{ width: '100%', borderTop: '1px solid #f1f5f9', paddingTop: 14, marginTop: 'auto', textAlign: 'left', fontSize: '0.85rem', color: '#475569', display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {f.qualification && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span>🎓</span>
+                      <FaGraduationCap style={{ color: 'var(--royal-blue)', flexShrink: 0 }} />
                       <span><strong>Qualification:</strong> {f.qualification}</span>
                     </div>
                   )}
                   {f.experience && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span>⏳</span>
+                      <FaHourglassHalf style={{ color: 'var(--gold)', flexShrink: 0 }} />
                       <span><strong>Experience:</strong> {f.experience}</span>
                     </div>
                   )}
                   {f.subject && (
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span>📚</span>
+                      <FaBookOpen style={{ color: '#059669', flexShrink: 0 }} />
                       <span><strong>Subject:</strong> {f.subject}</span>
                     </div>
                   )}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import api from '../api/client';
 import PageHero from '../components/PageHero';
+import { FaFilePdf, FaWhatsapp, FaClipboardList, FaCheckCircle, FaBookOpen } from 'react-icons/fa';
 
 const classesOffered = [
   { level: 'Pre-Primary', grades: 'Nursery, LKG, UKG', desc: 'Playful, activity-based learning focusing on motor skills and language.' },
@@ -58,11 +59,11 @@ export default function Admissions() {
             We welcome applications for students seeking quality English medium education in a disciplined, caring, and modern academic environment.
           </p>
           <div style={{ marginTop: 24, display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button onClick={downloadProspectus} className="btn btn-navy">
-              📄 Download School Prospectus
+            <button onClick={downloadProspectus} className="btn btn-navy" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <FaFilePdf style={{ color: '#ef4444' }} /> Download School Prospectus
             </button>
-            <a href="https://wa.me/919516011227?text=Hello,%20I%20would%20like%20to%20enquire%20about%20admission" target="_blank" rel="noreferrer" className="btn btn-outline-dark">
-              💬 Direct WhatsApp Enquiry
+            <a href="https://wa.me/919516011227?text=Hello,%20I%20would%20like%20to%20enquire%20about%20admission" target="_blank" rel="noreferrer" className="btn btn-outline-dark" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <FaWhatsapp style={{ color: '#25d366', fontSize: '1.1rem' }} /> Direct WhatsApp Enquiry
             </a>
           </div>
         </div>
@@ -78,7 +79,7 @@ export default function Admissions() {
           <div className="highlights-grid">
             {classesOffered.map((c, i) => (
               <div className="highlight-card" key={i}>
-                <div className="highlight-icon">🎒</div>
+                <div className="highlight-icon"><FaBookOpen /></div>
                 <h3>{c.level}</h3>
                 <div style={{ color: 'var(--royal-blue)', fontWeight: 600, fontSize: '0.9rem', marginBottom: 6 }}>{c.grades}</div>
                 <p>{c.desc}</p>
@@ -118,7 +119,7 @@ export default function Admissions() {
                 Fill out this quick form and our admissions team will contact you shortly regarding seats, fee structure, and campus visit.
               </p>
               <div style={{ background: '#fff', padding: 24, borderRadius: 16, border: '1px solid var(--border)', marginBottom: 20 }}>
-                <h4 style={{ color: 'var(--navy-mid)', marginBottom: 12 }}>📋 Required Documents for Admission:</h4>
+                <h4 style={{ color: 'var(--navy-mid)', marginBottom: 12, display: 'inline-flex', alignItems: 'center', gap: 6 }}><FaClipboardList style={{ color: 'var(--royal-blue)' }} /> Required Documents for Admission:</h4>
                 <ul style={{ listStyle: 'disc', paddingLeft: 20, color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.8 }}>
                   <li>Birth Certificate (for Pre-Primary &amp; Primary)</li>
                   <li>Previous School Transfer Certificate (TC)</li>
@@ -133,7 +134,7 @@ export default function Admissions() {
               <h3 style={{ marginBottom: 18, color: 'var(--navy-mid)' }}>Online Admission Form</h3>
               {submitted ? (
                 <div style={{ padding: 28, background: '#dcfce7', color: '#166534', borderRadius: 12, textAlign: 'center' }}>
-                  <h4 style={{ fontSize: '1.2rem', marginBottom: 8 }}>✅ Enquiry Submitted Successfully!</h4>
+                  <h4 style={{ fontSize: '1.2rem', marginBottom: 8, display: 'inline-flex', alignItems: 'center', gap: 8 }}><FaCheckCircle /> Enquiry Submitted Successfully!</h4>
                   <p style={{ fontSize: '0.95rem' }}>Thank you for reaching out to Pt. Harishankar Shukla School. Our admissions team will contact you on <strong>{submittedPhone}</strong> shortly.</p>
                   <button onClick={() => setSubmitted(false)} className="btn btn-navy" style={{ marginTop: 16 }}>Submit Another Enquiry</button>
                 </div>

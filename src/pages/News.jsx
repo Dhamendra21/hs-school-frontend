@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import api from '../api/client';
 import { imageSrc } from '../api/upload';
 import PageHero from '../components/PageHero';
+import { FaFilePdf, FaImage, FaBullhorn, FaEye, FaDownload, FaTimes } from 'react-icons/fa';
 
 export default function News() {
   const [list, setList] = useState([]);
@@ -72,24 +73,24 @@ export default function News() {
                         onClick={() => setPreviewImage(fileUrl)}
                       />
                     ) : (
-                      <span style={{ fontSize: '3rem' }}>{isPdf ? '📄' : '📢'}</span>
+                      <span style={{ fontSize: '3rem', color: '#fff' }}>{isPdf ? <FaFilePdf style={{ color: '#ef4444' }} /> : <FaBullhorn style={{ color: 'var(--gold)' }} />}</span>
                     )}
 
                     {/* Notice Type Badge Tag */}
                     <div style={{ position: 'absolute', top: 12, right: 12, display: 'flex', gap: 6 }}>
                       {isPdf && (
-                        <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.72rem', fontWeight: 800, padding: '3px 10px', borderRadius: 6, boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}>
-                          📄 PDF
+                        <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.72rem', fontWeight: 800, padding: '3px 10px', borderRadius: 6, boxShadow: '0 2px 6px rgba(0,0,0,0.2)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                          <FaFilePdf /> PDF
                         </span>
                       )}
                       {isImage && (
-                        <span style={{ background: '#3b82f6', color: '#fff', fontSize: '0.72rem', fontWeight: 800, padding: '3px 10px', borderRadius: 6, boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}>
-                          🖼️ IMAGE
+                        <span style={{ background: '#3b82f6', color: '#fff', fontSize: '0.72rem', fontWeight: 800, padding: '3px 10px', borderRadius: 6, boxShadow: '0 2px 6px rgba(0,0,0,0.2)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                          <FaImage /> IMAGE
                         </span>
                       )}
                       {!hasAttachment && (
-                        <span style={{ background: 'rgba(255,255,255,0.25)', backdropFilter: 'blur(4px)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, padding: '3px 10px', borderRadius: 6 }}>
-                          📢 GENERAL
+                        <span style={{ background: 'rgba(255,255,255,0.25)', backdropFilter: 'blur(4px)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, padding: '3px 10px', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                          <FaBullhorn /> GENERAL
                         </span>
                       )}
                     </div>
@@ -100,7 +101,7 @@ export default function News() {
                     {/* Date Badge */}
                     <div style={{ marginBottom: 10 }}>
                       <span style={{ background: '#f1f5f9', color: '#475569', padding: '3px 10px', borderRadius: 6, fontSize: '0.78rem', fontWeight: 600 }}>
-                        📅 {n.date}
+                        {n.date}
                       </span>
                     </div>
 
@@ -119,9 +120,9 @@ export default function News() {
                       <button
                         onClick={() => openNoticeModal(n)}
                         className="btn btn-navy"
-                        style={{ padding: '7px 14px', fontSize: '0.82rem', borderRadius: 6 }}
+                        style={{ padding: '7px 14px', fontSize: '0.82rem', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 6 }}
                       >
-                        👁️ View Notice
+                        <FaEye /> View Notice
                       </button>
 
                       {isPdf && (
@@ -131,9 +132,9 @@ export default function News() {
                           target="_blank"
                           rel="noreferrer"
                           className="btn btn-primary"
-                          style={{ padding: '7px 14px', fontSize: '0.82rem', borderRadius: 6, background: '#dc2626', borderColor: '#b91c1c' }}
+                          style={{ padding: '7px 14px', fontSize: '0.82rem', borderRadius: 6, background: '#dc2626', borderColor: '#b91c1c', display: 'inline-flex', alignItems: 'center', gap: 6 }}
                         >
-                          📥 Download PDF
+                          <FaDownload /> Download PDF
                         </a>
                       )}
 
@@ -141,9 +142,9 @@ export default function News() {
                         <button
                           onClick={() => setPreviewImage(fileUrl)}
                           className="btn btn-outline-dark"
-                          style={{ padding: '7px 14px', fontSize: '0.82rem', borderRadius: 6 }}
+                          style={{ padding: '7px 14px', fontSize: '0.82rem', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 6 }}
                         >
-                          🖼️ View Image
+                          <FaImage /> View Image
                         </button>
                       )}
                     </div>
@@ -195,15 +196,15 @@ export default function News() {
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12, flexWrap: 'wrap' }}>
                 <span className="badge-new-flash">OFFICIAL ANNOUNCEMENT</span>
-                <span style={{ fontSize: '0.82rem', color: '#64748b' }}>📅 {activeNotice.date}</span>
+                <span style={{ fontSize: '0.82rem', color: '#64748b' }}>{activeNotice.date}</span>
                 {isPdf && (
-                  <span style={{ background: '#dc2626', color: '#fff', padding: '2px 10px', borderRadius: 50, fontSize: '0.75rem', fontWeight: 700 }}>
-                    📄 PDF DOCUMENT
+                  <span style={{ background: '#dc2626', color: '#fff', padding: '2px 10px', borderRadius: 50, fontSize: '0.75rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    <FaFilePdf /> PDF DOCUMENT
                   </span>
                 )}
                 {isImage && (
-                  <span style={{ background: '#3b82f6', color: '#fff', padding: '2px 10px', borderRadius: 50, fontSize: '0.75rem', fontWeight: 700 }}>
-                    🖼️ IMAGE ATTACHMENT
+                  <span style={{ background: '#3b82f6', color: '#fff', padding: '2px 10px', borderRadius: 50, fontSize: '0.75rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    <FaImage /> IMAGE ATTACHMENT
                   </span>
                 )}
               </div>
@@ -216,7 +217,7 @@ export default function News() {
                 {activeNotice.content}
               </div>
 
-              {/* 👁️ Eye Icon Toggle Button for Attachments */}
+              {/* Eye Icon Toggle Button for Attachments */}
               {hasAttachment && (
                 <div style={{ marginBottom: 16 }}>
                   <button
@@ -238,7 +239,7 @@ export default function News() {
                       transition: 'all 0.2s ease'
                     }}
                   >
-                    <span style={{ fontSize: '1.1rem' }}>👁️</span>
+                    <FaEye />
                     <span>{showAttachment ? 'Hide Attachment' : `View Attached ${isPdf ? 'PDF Document' : 'Picture'}`}</span>
                     <span style={{ fontSize: '0.75rem', opacity: 0.85 }}>{showAttachment ? '▲' : '▼'}</span>
                   </button>
@@ -252,7 +253,7 @@ export default function News() {
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12, flexWrap: 'wrap', gap: 10 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <span style={{ fontSize: '1.6rem' }}>📄</span>
+                          <FaFilePdf style={{ fontSize: '1.6rem', color: '#dc2626' }} />
                           <div>
                             <strong style={{ fontSize: '0.92rem', color: '#0f3460', display: 'block' }}>Official PDF Circular</strong>
                             <span style={{ fontSize: '0.78rem', color: '#64748b' }}>Read document directly below or download</span>
@@ -267,7 +268,7 @@ export default function News() {
                           className="btn btn-primary"
                           style={{ padding: '8px 18px', fontSize: '0.85rem', background: '#dc2626', borderColor: '#b91c1c', display: 'inline-flex', alignItems: 'center', gap: 6 }}
                         >
-                          📥 Download PDF
+                          <FaDownload /> Download PDF
                         </a>
                       </div>
 
@@ -283,12 +284,14 @@ export default function News() {
                   ) : (
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-                        <strong style={{ fontSize: '0.9rem', color: '#0f3460' }}>🖼️ Attached Picture / Banner</strong>
+                        <strong style={{ fontSize: '0.9rem', color: '#0f3460', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                          <FaImage style={{ color: '#1a56db' }} /> Attached Picture / Banner
+                        </strong>
                         <button
                           onClick={() => setPreviewImage(fileUrl)}
                           style={{ background: 'none', border: 'none', color: '#1a56db', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}
                         >
-                          🔍 Zoom & View Full Image ↗
+                          Zoom & View Full Image ↗
                         </button>
                       </div>
                       <img

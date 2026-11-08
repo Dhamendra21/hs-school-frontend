@@ -5,6 +5,22 @@ import { imageSrc } from '../api/upload';
 import HeroSlider from '../components/HeroSlider';
 import SitePopup from '../components/SitePopup';
 import ScrollReveal from '../components/ScrollReveal';
+import {
+  FaGraduationCap,
+  FaSchool,
+  FaChalkboardTeacher,
+  FaBus,
+  FaCrown,
+  FaFilePdf,
+  FaImage,
+  FaBullhorn,
+  FaEye,
+  FaDownload,
+  FaStar,
+  FaWhatsapp,
+  FaMicroscope,
+  FaBook
+} from 'react-icons/fa';
 
 export default function Home() {
   const [content, setContent] = useState({});
@@ -51,28 +67,28 @@ export default function Home() {
           <div className="container">
             <div className="quick-info-grid">
               <div className="quick-info-card">
-                <div className="quick-info-icon">🎓</div>
+                <div className="quick-info-icon"><FaGraduationCap /></div>
                 <div className="quick-info-content">
                   <h4>Nursery to Class XII</h4>
                   <p>Complete K-12 English Medium Education</p>
                 </div>
               </div>
               <div className="quick-info-card">
-                <div className="quick-info-icon">🏫</div>
+                <div className="quick-info-icon"><FaSchool /></div>
                 <div className="quick-info-content">
                   <h4>Recognized Institution</h4>
                   <p>High Academic & Ethical Standards</p>
                 </div>
               </div>
               <div className="quick-info-card">
-                <div className="quick-info-icon">👨‍🏫</div>
+                <div className="quick-info-icon"><FaChalkboardTeacher /></div>
                 <div className="quick-info-content">
                   <h4>Experienced Faculty</h4>
                   <p>Dedicated Subject Experts & Mentors</p>
                 </div>
               </div>
               <div className="quick-info-card">
-                <div className="quick-info-icon">🚌</div>
+                <div className="quick-info-icon"><FaBus /></div>
                 <div className="quick-info-content">
                   <h4>Safe &amp; Secure Campus</h4>
                   <p>Disciplined &amp; Caring Environment</p>
@@ -102,7 +118,9 @@ export default function Home() {
                   )}
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.78rem', background: 'var(--navy-mid)', color: '#fff', padding: '3px 12px', borderRadius: 4, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-block', marginBottom: 10 }}>👑 Chairman's Message</span>
+                  <span style={{ fontSize: '0.78rem', background: 'var(--navy-mid)', color: '#fff', padding: '3px 12px', borderRadius: 4, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+                    <FaCrown /> Chairman's Message
+                  </span>
                   <blockquote>"{about.chairmanMessage || 'Our commitment is to empower every student with knowledge, wisdom, and strong moral character.'}"</blockquote>
                   <div className="principal-name" style={{ marginTop: 12 }}>{about.chairmanName || 'Shri Sushil Shukla'}</div>
                   <div className="principal-role">{about.chairmanRole || 'Chairman'}</div>
@@ -119,7 +137,9 @@ export default function Home() {
                   )}
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.78rem', background: 'var(--royal-blue)', color: '#fff', padding: '3px 12px', borderRadius: 4, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-block', marginBottom: 10 }}>🎓 Principal's Message</span>
+                  <span style={{ fontSize: '0.78rem', background: 'var(--royal-blue)', color: '#fff', padding: '3px 12px', borderRadius: 4, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+                    <FaGraduationCap /> Principal's Message
+                  </span>
                   <blockquote>"{about.principalMessage || 'Education is not merely about academic achievement; it is about developing responsible, confident and compassionate individuals.'}"</blockquote>
                   <div className="principal-name" style={{ marginTop: 12 }}>{about.principalName || 'Mrs. Tripati Shrivastava'}</div>
                   <div className="principal-role">{about.principalRole || 'Principal'}</div>
@@ -223,24 +243,24 @@ export default function Home() {
                           onClick={() => openNoticeModal(n)}
                         />
                       ) : (
-                        <span style={{ fontSize: '2.8rem' }}>{isPdf ? '📄' : '📢'}</span>
+                        <span style={{ fontSize: '2.8rem', color: '#fff' }}>{isPdf ? <FaFilePdf style={{ color: '#ef4444' }} /> : <FaBullhorn style={{ color: 'var(--gold)' }} />}</span>
                       )}
 
                       {/* Notice Type Badge Tag */}
                       <div style={{ position: 'absolute', top: 12, right: 12, display: 'flex', gap: 6 }}>
                         {isPdf && (
-                          <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.72rem', fontWeight: 800, padding: '3px 10px', borderRadius: 6, boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}>
-                            📄 PDF
+                          <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.72rem', fontWeight: 800, padding: '3px 10px', borderRadius: 6, boxShadow: '0 2px 6px rgba(0,0,0,0.2)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                            <FaFilePdf /> PDF
                           </span>
                         )}
                         {isImage && (
-                          <span style={{ background: '#3b82f6', color: '#fff', fontSize: '0.72rem', fontWeight: 800, padding: '3px 10px', borderRadius: 6, boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}>
-                            🖼️ IMAGE
+                          <span style={{ background: '#3b82f6', color: '#fff', fontSize: '0.72rem', fontWeight: 800, padding: '3px 10px', borderRadius: 6, boxShadow: '0 2px 6px rgba(0,0,0,0.2)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                            <FaImage /> IMAGE
                           </span>
                         )}
                         {!hasAttachment && (
-                          <span style={{ background: 'rgba(255,255,255,0.25)', backdropFilter: 'blur(4px)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, padding: '3px 10px', borderRadius: 6 }}>
-                            📢 GENERAL
+                          <span style={{ background: 'rgba(255,255,255,0.25)', backdropFilter: 'blur(4px)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, padding: '3px 10px', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                            <FaBullhorn /> GENERAL
                           </span>
                         )}
                       </div>
@@ -250,7 +270,7 @@ export default function Home() {
                     <div className="news-body" style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: 20 }}>
                       <div style={{ marginBottom: 10 }}>
                         <span style={{ background: '#f1f5f9', color: '#475569', padding: '3px 10px', borderRadius: 6, fontSize: '0.78rem', fontWeight: 600 }}>
-                          📅 {n.date}
+                          {n.date}
                         </span>
                       </div>
                       <h3 style={{ fontSize: '1.15rem', color: 'var(--navy)', marginBottom: 8, lineHeight: 1.4 }}>{n.title}</h3>
@@ -260,9 +280,9 @@ export default function Home() {
                         <button
                           onClick={() => openNoticeModal(n)}
                           className="btn btn-navy"
-                          style={{ padding: '7px 14px', fontSize: '0.82rem', borderRadius: 6 }}
+                          style={{ padding: '7px 14px', fontSize: '0.82rem', borderRadius: 6, display: 'inline-flex', alignItems: 'center', gap: 6 }}
                         >
-                          👁️ View Notice
+                          <FaEye /> View Notice
                         </button>
                         {isPdf && (
                           <a
@@ -271,9 +291,9 @@ export default function Home() {
                             target="_blank"
                             rel="noreferrer"
                             className="btn btn-primary"
-                            style={{ padding: '7px 14px', fontSize: '0.82rem', borderRadius: 6, background: '#dc2626', borderColor: '#b91c1c' }}
+                            style={{ padding: '7px 14px', fontSize: '0.82rem', borderRadius: 6, background: '#dc2626', borderColor: '#b91c1c', display: 'inline-flex', alignItems: 'center', gap: 6 }}
                           >
-                            📥 Download PDF
+                            <FaDownload /> Download PDF
                           </a>
                         )}
                       </div>
@@ -466,8 +486,8 @@ export default function Home() {
             <p>{cta.text || 'Give your child the foundation for a bright and successful future. Apply online or visit our school office today.'}</p>
             <div className="hero-actions" style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link to="/admissions" className="btn btn-primary">Online Admission Enquiry</Link>
-              <a href="https://wa.me/919516011227?text=Hello,%20I%20would%20like%20to%20enquire%20about%20admission" target="_blank" rel="noreferrer" className="btn btn-outline" style={{ border: '2px solid #25d366', color: '#25d366' }}>
-                💬 Enquire on WhatsApp
+              <a href="https://wa.me/919516011227?text=Hello,%20I%20would%20like%20to%20enquire%20about%20admission" target="_blank" rel="noreferrer" className="btn btn-outline" style={{ border: '2px solid #25d366', color: '#25d366', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                <FaWhatsapp style={{ fontSize: '1.2rem' }} /> Enquire on WhatsApp
               </a>
             </div>
           </div>

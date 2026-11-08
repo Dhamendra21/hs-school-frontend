@@ -3,7 +3,7 @@ import api from './client';
 /**
  * Upload an image file to the server.
  * @param {File} file
- * @returns {Promise<{ url: string, filename: string }>}
+ * @returns {Promise<{ url: string, relativeUrl: string, filename: string }>}
  */
 export async function uploadImage(file) {
   if (!file) throw new Error('No file selected');
@@ -21,12 +21,21 @@ export async function uploadImage(file) {
   return data;
 }
 
-/** Resolve image path for display (works with /uploads/... and external URLs) */
+/** Resolve image path for display (works with absolute URLs, /uploads/..., and external URLs) */
 export function imageSrc(path) {
   if (!path) return '';
-  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
+  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:') || path.startsWith('blob:')) {
     return path;
   }
-  // Vite proxies /uploads to backend in dev
+
+  // If in production and API baseURL is a full URL, prepend backend base URL
+  const apiBase = import.meta.env.VITE_API_URL || '';
+  if (apiBase.startsWith('http://') || apiBase.startsWith('https://')) {
+    const backendOrigin = apiBase.replace(/\/api\/?$/, '');
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return `${backendOrigin}${cleanPath}`;
+  }
+
+  // Relative path (dev proxy or monolithic setup)
   return path.startsWith('/') ? path : `/${path}`;
 }

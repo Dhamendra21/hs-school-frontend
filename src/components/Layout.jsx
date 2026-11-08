@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import api from '../api/client';
 import NoticeTicker from './NoticeTicker';
-import { FaFacebook } from "react-icons/fa";
+import { FaFacebook, FaWhatsapp, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 
 const links = [
@@ -41,12 +41,14 @@ export default function Layout() {
       <div className="topbar">
         <div className="container topbar-inner">
           <div className="topbar-left">
-            <span className="topbar-item">📍 {site.address}</span>
-            <span className="topbar-item">📞 {site.phone}</span>
-            <span className="topbar-item">✉️ {site.email}</span>
+            <span className="topbar-item"><FaMapMarkerAlt style={{ color: 'var(--gold)' }} /> {site.address}</span>
+            <span className="topbar-item"><FaPhoneAlt style={{ color: 'var(--gold)' }} /> {site.phone}</span>
+            <span className="topbar-item"><FaEnvelope style={{ color: 'var(--gold)' }} /> {site.email}</span>
           </div>
           <div className="topbar-right">
-            <a href="https://wa.me/919516011227?text=Hello,%20I%20would%20like%20to%20enquire%20about%20admission%20at%20Pt.%20Harishankar%20Shukla%20School%20for%20my%20child." target="_blank" rel="noreferrer" className="topbar-item" style={{ color: '#25d366', fontWeight: 600 }}>💬 WhatsApp Enquiry</a>
+            <a href="https://wa.me/919516011227?text=Hello,%20I%20would%20like%20to%20enquire%20about%20admission%20at%20Pt.%20Harishankar%20Shukla%20School%20for%20my%20child." target="_blank" rel="noreferrer" className="topbar-item" style={{ color: '#25d366', fontWeight: 600 }}>
+              <FaWhatsapp style={{ fontSize: '1rem' }} /> WhatsApp Enquiry
+            </a>
             <Link to="/admissions" className="topbar-item" style={{ background: 'var(--gold)', color: '#000', padding: '2px 10px', borderRadius: 4, fontWeight: 600 }}>{site.topbarNote}</Link>
           </div>
         </div>
@@ -86,6 +88,20 @@ export default function Layout() {
         </div>
       </header>
 
+      {/* Mobile Drawer Backdrop Overlay */}
+      {open && (
+        <div
+          onClick={close}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.65)',
+            backdropFilter: 'blur(4px)',
+            zIndex: 998
+          }}
+        />
+      )}
+
       <NoticeTicker />
 
       <Outlet />
@@ -98,7 +114,7 @@ export default function Layout() {
         className="whatsapp-float"
         aria-label="Enquire on WhatsApp"
       >
-        <span className="whatsapp-icon">💬</span>
+        <span className="whatsapp-icon"><FaWhatsapp /></span>
         <span>WhatsApp Us</span>
       </a>
 
@@ -138,7 +154,7 @@ export default function Layout() {
                 <li><Link to="/academics">Academics</Link></li>
                 <li><Link to="/admissions">Admissions 2026–27</Link></li>
                 <li><Link to="/faculty">Our Faculty</Link></li>
-                <li><a href="https://wa.me/919516011227" target="_blank" rel="noreferrer" style={{ color: '#25d366' }}>💬 Enquire on WhatsApp</a></li>
+                <li><a href="https://wa.me/919516011227" target="_blank" rel="noreferrer" style={{ color: '#25d366', display: 'inline-flex', alignItems: 'center', gap: 6 }}><FaWhatsapp /> Enquire on WhatsApp</a></li>
               </ul>
             </div>
             <div>
@@ -154,14 +170,14 @@ export default function Layout() {
             <div>
               <h4>Contact Info</h4>
               <ul className="footer-links">
-                <li>📍 {site.address}</li>
-                <li>📞 {site.phone}</li>
-                <li>✉️ {site.email}</li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: 8 }}><FaMapMarkerAlt style={{ color: 'var(--gold)', flexShrink: 0 }} /> {site.address}</li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: 8 }}><FaPhoneAlt style={{ color: 'var(--gold)', flexShrink: 0 }} /> {site.phone}</li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: 8 }}><FaEnvelope style={{ color: 'var(--gold)', flexShrink: 0 }} /> {site.email}</li>
                 <li><Link to="/contact">Send Message →</Link></li>
               </ul>
             </div>
             <div className="footer-map-col">
-              <h4>📍 Location Map</h4>
+              <h4><FaMapMarkerAlt style={{ color: 'var(--gold)', marginRight: 6 }} />Location Map</h4>
               <div className="footer-map-frame">
                 <iframe
                   title="School Location Map"
@@ -175,8 +191,9 @@ export default function Layout() {
                 target="_blank"
                 rel="noreferrer"
                 className="footer-map-btn"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
               >
-                🗺️ Open in Google Maps ↗
+                <FaMapMarkedAlt /> Open in Google Maps ↗
               </a>
             </div>
           </div>

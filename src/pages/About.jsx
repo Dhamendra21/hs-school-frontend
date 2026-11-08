@@ -4,6 +4,7 @@ import api from '../api/client';
 import { imageSrc } from '../api/upload';
 import PageHero from '../components/PageHero';
 import ScrollReveal from '../components/ScrollReveal';
+import { FaSchool, FaCrown, FaGraduationCap, FaBullseye, FaEye, FaHeart } from 'react-icons/fa';
 
 export default function About() {
   const [about, setAbout] = useState(null);
@@ -18,7 +19,7 @@ export default function About() {
         <section className="section">
           <div className="container">
             <div className="two-col">
-              <div className="two-col-img">🏫</div>
+              <div className="two-col-img"><FaSchool style={{ fontSize: '4.5rem' }} /></div>
               <div className="two-col-text">
                 <span className="section-label">Our Story</span>
                 <h2>{a.title || 'Our School'}</h2>
@@ -49,7 +50,9 @@ export default function About() {
                     )}
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.78rem', background: 'var(--navy-mid)', color: '#fff', padding: '3px 12px', borderRadius: 4, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-block', marginBottom: 10 }}>👑 Chairman's Message</span>
+                    <span style={{ fontSize: '0.78rem', background: 'var(--navy-mid)', color: '#fff', padding: '3px 12px', borderRadius: 4, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+                      <FaCrown /> Chairman's Message
+                    </span>
                     <blockquote>"{a.chairmanMessage || 'Our commitment is to empower every student with knowledge, wisdom, and strong moral character.'}"</blockquote>
                     <div className="principal-name" style={{ marginTop: 12 }}>{a.chairmanName || 'Shri Sushil Shukla'}</div>
                     <div className="principal-role">{a.chairmanRole || 'Chairman'}</div>
@@ -67,7 +70,9 @@ export default function About() {
                   )}
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.78rem', background: 'var(--royal-blue)', color: '#fff', padding: '3px 12px', borderRadius: 4, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-block', marginBottom: 10 }}>🎓 Principal's Message</span>
+                  <span style={{ fontSize: '0.78rem', background: 'var(--royal-blue)', color: '#fff', padding: '3px 12px', borderRadius: 4, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
+                    <FaGraduationCap /> Principal's Message
+                  </span>
                   <blockquote>"{a.principalMessage || 'Education is not merely about academic achievement; it is about developing responsible, confident and compassionate individuals.'}"</blockquote>
                   <div className="principal-name" style={{ marginTop: 12 }}>{a.principalName || 'Mrs. Tripati Shrivastava'}</div>
                   <div className="principal-role">{a.principalRole || 'Principal'}</div>
@@ -86,9 +91,9 @@ export default function About() {
               <h2 className="section-title">Mission & Values</h2>
             </div>
             <div className="cards-grid">
-              <div className="card"><div className="card-icon">🎯</div><h3>Our Mission</h3><p>{a.mission}</p></div>
-              <div className="card"><div className="card-icon">👁️</div><h3>Our Vision</h3><p>{a.vision}</p></div>
-              <div className="card"><div className="card-icon">❤️</div><h3>Our Values</h3><p>{a.values}</p></div>
+              <div className="card"><div className="card-icon"><FaBullseye style={{ color: 'var(--royal-blue)' }} /></div><h3>Our Mission</h3><p>{a.mission}</p></div>
+              <div className="card"><div className="card-icon"><FaEye style={{ color: 'var(--gold)' }} /></div><h3>Our Vision</h3><p>{a.vision}</p></div>
+              <div className="card"><div className="card-icon"><FaHeart style={{ color: '#ef4444' }} /></div><h3>Our Values</h3><p>{a.values}</p></div>
             </div>
           </div>
         </section>

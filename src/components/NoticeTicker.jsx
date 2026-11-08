@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/client';
 import { imageSrc } from '../api/upload';
+import { FaBullhorn, FaFilePdf, FaImage, FaEye, FaDownload, FaTimes } from 'react-icons/fa';
 
 export default function NoticeTicker() {
   const [notices, setNotices] = useState([]);
@@ -31,7 +32,7 @@ export default function NoticeTicker() {
     <>
       <div className="notice-ticker-bar" aria-label="Latest Running Notices Ticker">
         <div className="notice-ticker-label">
-          <span>📢</span>
+          <FaBullhorn />
           <span>Latest Notices</span>
         </div>
         <div className="notice-ticker-content">
@@ -103,10 +104,10 @@ export default function NoticeTicker() {
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12, flexWrap: 'wrap' }}>
                 <span className="badge-new-flash">OFFICIAL ANNOUNCEMENT</span>
-                <span style={{ fontSize: '0.82rem', color: '#64748b' }}>📅 {activeNotice.date}</span>
+                <span style={{ fontSize: '0.82rem', color: '#64748b' }}>{activeNotice.date}</span>
                 {isPdf && (
-                  <span style={{ background: '#dc2626', color: '#fff', padding: '2px 10px', borderRadius: 50, fontSize: '0.75rem', fontWeight: 700 }}>
-                    📄 PDF DOCUMENT
+                  <span style={{ background: '#dc2626', color: '#fff', padding: '2px 10px', borderRadius: 50, fontSize: '0.75rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                    <FaFilePdf /> PDF DOCUMENT
                   </span>
                 )}
               </div>
@@ -119,7 +120,7 @@ export default function NoticeTicker() {
                 {activeNotice.content || 'Please contact school office for complete notice details.'}
               </p>
 
-              {/* 👁️ Eye Icon Button to Toggle Attachment Display */}
+              {/* Eye Icon Button to Toggle Attachment Display */}
               {hasAttachment && (
                 <div style={{ marginBottom: 16 }}>
                   <button
@@ -141,7 +142,7 @@ export default function NoticeTicker() {
                       transition: 'all 0.2s ease'
                     }}
                   >
-                    <span style={{ fontSize: '1.1rem' }}>👁️</span>
+                    <FaEye />
                     <span>{showAttachment ? 'Hide Attachment' : `View ${isPdf ? 'PDF Document' : 'Picture Attachment'}`}</span>
                     <span style={{ fontSize: '0.75rem', opacity: 0.85 }}>{showAttachment ? '▲' : '▼'}</span>
                   </button>
@@ -155,7 +156,7 @@ export default function NoticeTicker() {
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12, flexWrap: 'wrap', gap: 10 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <span style={{ fontSize: '1.6rem' }}>📄</span>
+                          <FaFilePdf style={{ fontSize: '1.6rem', color: '#dc2626' }} />
                           <div>
                             <strong style={{ fontSize: '0.92rem', color: '#0f3460', display: 'block' }}>Official PDF Circular</strong>
                             <span style={{ fontSize: '0.78rem', color: '#64748b' }}>Read document below or download</span>
@@ -166,9 +167,9 @@ export default function NoticeTicker() {
                           target="_blank"
                           rel="noreferrer"
                           className="btn btn-primary"
-                          style={{ padding: '8px 18px', fontSize: '0.85rem', background: '#dc2626', borderColor: '#b91c1c' }}
+                          style={{ padding: '8px 18px', fontSize: '0.85rem', background: '#dc2626', borderColor: '#b91c1c', display: 'inline-flex', alignItems: 'center', gap: 6 }}
                         >
-                          📄 Open PDF Document →
+                          <FaFilePdf /> Open PDF Document →
                         </a>
                       </div>
 
@@ -184,14 +185,16 @@ export default function NoticeTicker() {
                   ) : (
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-                        <strong style={{ fontSize: '0.9rem', color: '#0f3460' }}>🖼️ Notice Picture / Poster</strong>
+                        <strong style={{ fontSize: '0.9rem', color: '#0f3460', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                          <FaImage style={{ color: '#1a56db' }} /> Notice Picture / Poster
+                        </strong>
                         <a
                           href={fileUrl}
                           target="_blank"
                           rel="noreferrer"
                           style={{ fontSize: '0.82rem', color: '#1a56db', fontWeight: 600 }}
                         >
-                          🔍 View Fullscreen Picture ↗
+                          View Fullscreen Picture ↗
                         </a>
                       </div>
                       <a href={fileUrl} target="_blank" rel="noreferrer">

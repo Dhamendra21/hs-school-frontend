@@ -1,6 +1,7 @@
 import { imageSrc } from '../api/upload';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaGraduationCap } from 'react-icons/fa';
 
 /**
  * Institutional Hero Slideshow with branding overlay & dual CTAs
@@ -40,8 +41,8 @@ export default function HeroSlider({ slides = [] }) {
           />
           {i === 0 && (
             <div className="container slide-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', zIndex: 10, color: '#fff', textAlign: 'center', padding: '0 20px' }}>
-              <span style={{ background: 'var(--gold)', color: '#000', padding: '4px 16px', borderRadius: 50, fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 16, boxShadow: '0 4px 14px rgba(217, 119, 6, 0.4)' }}>
-                🎓 Admissions Open 2026–27
+              <span style={{ background: 'var(--gold)', color: '#000', padding: '4px 16px', borderRadius: 50, fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 16, boxShadow: '0 4px 14px rgba(217, 119, 6, 0.4)', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <FaGraduationCap /> Admissions Open 2026–27
               </span>
               <h1 className="slide-title" style={{ fontSize: 'clamp(1.8rem, 4vw, 3.2rem)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '-0.02em', textShadow: '0 4px 20px rgba(0,0,0,0.5)', maxWidth: 900, marginBottom: 14, lineHeight: 1.15 }}>
                 Pt. Harishankar Shukla English Medium Higher Secondary School
