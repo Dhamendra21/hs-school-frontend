@@ -20,7 +20,9 @@ export default function Login() {
       await login(username, password);
       nav('/admin');
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed');
+      console.error('Login error:', err);
+      const serverMsg = err.response?.data?.error || err.response?.data?.message || err.message;
+      setError(serverMsg || 'Login failed. Please check credentials or network.');
     } finally {
       setLoading(false);
     }
