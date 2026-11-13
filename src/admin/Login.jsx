@@ -48,9 +48,7 @@ export default function Login() {
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-        <div style={{ marginTop: 20, textAlign: 'center', fontSize: '0.8rem', color: '#888', background: '#f8f9fc', padding: 12, borderRadius: 8 }}>
-          Default: <code>admin</code> / <code>school123</code>
-        </div>
+  
       </div>
     </div>
   );
