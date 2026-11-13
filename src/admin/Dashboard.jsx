@@ -2,6 +2,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/client';
 import { useAuth } from '../context/AuthContext';
+import {
+  FaBolt,
+  FaEnvelopeOpenText,
+  FaEdit,
+  FaPlus,
+  FaInbox
+} from 'react-icons/fa';
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -64,20 +71,34 @@ export default function Dashboard() {
 
       {/* Quick Actions */}
       <div style={{ ...card, marginBottom: 28 }}>
-        <h2 style={{ fontSize: '1.1rem', color: '#0f3460', marginBottom: 14 }}>⚡ Quick Portal Actions</h2>
+        <h2 style={{ fontSize: '1.1rem', color: '#0f3460', marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <FaBolt style={{ color: '#f59e0b' }} /> Quick Portal Actions
+        </h2>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-          <Link to="/admin/enquiries" style={{ padding: '10px 18px', background: '#1a56db', color: '#fff', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>📩 View Enquiries</Link>
-          <Link to="/admin/content" style={{ padding: '10px 18px', background: '#0f3460', color: '#fff', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>✏️ Edit Website Content</Link>
-          <Link to="/admin/notices" style={{ padding: '10px 18px', background: '#f59e0b', color: '#fff', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>+ Post Notice</Link>
-          <Link to="/admin/faculty" style={{ padding: '10px 18px', background: '#10b981', color: '#fff', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>+ Add Faculty</Link>
-          <Link to="/admin/gallery" style={{ padding: '10px 18px', background: '#8b5cf6', color: '#fff', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>+ Upload Photo</Link>
+          <Link to="/admin/enquiries" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', background: '#1a56db', color: '#fff', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+            <FaEnvelopeOpenText /> View Enquiries
+          </Link>
+          <Link to="/admin/content" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', background: '#0f3460', color: '#fff', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+            <FaEdit /> Edit Website Content
+          </Link>
+          <Link to="/admin/notices" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', background: '#f59e0b', color: '#fff', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+            <FaPlus /> Post Notice
+          </Link>
+          <Link to="/admin/faculty" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', background: '#10b981', color: '#fff', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+            <FaPlus /> Add Faculty
+          </Link>
+          <Link to="/admin/gallery" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', background: '#8b5cf6', color: '#fff', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+            <FaPlus /> Upload Photo
+          </Link>
         </div>
       </div>
 
       {/* Recent Enquiries Preview */}
       <div style={card}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-          <h2 style={{ fontSize: '1.1rem', color: '#0f3460', margin: 0 }}>📩 Recent Admission Enquiries</h2>
+          <h2 style={{ fontSize: '1.1rem', color: '#0f3460', margin: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
+            <FaInbox style={{ color: '#1a56db' }} /> Recent Admission Enquiries
+          </h2>
           <Link to="/admin/enquiries" style={{ color: '#1a56db', fontSize: '0.85rem', fontWeight: 600 }}>View All Enquiries →</Link>
         </div>
         {!recentEnquiries.length ? (

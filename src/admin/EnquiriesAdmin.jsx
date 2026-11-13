@@ -1,5 +1,13 @@
 import { useState, useEffect } from 'react';
 import api from '../api/client';
+import {
+  FaEnvelopeOpenText,
+  FaSyncAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaWhatsapp,
+  FaTrashAlt
+} from 'react-icons/fa';
 
 export default function EnquiriesAdmin() {
   const [list, setList] = useState([]);
@@ -44,10 +52,12 @@ export default function EnquiriesAdmin() {
     <div style={{ maxWidth: 1100 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', color: '#0f3460', marginBottom: 4 }}>📩 Admission Enquiries</h1>
+          <h1 style={{ fontSize: '1.5rem', color: '#0f3460', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 10 }}>
+            <FaEnvelopeOpenText style={{ color: '#1a56db' }} /> Admission Enquiries
+          </h1>
           <p style={{ color: '#666', fontSize: '0.9rem' }}>Manage messages &amp; applications submitted by parents</p>
         </div>
-        <div style={{ display: 'flex', gap: 8 }}>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           {['all', 'unread', 'read', 'contacted'].map(s => (
             <button
               key={s}
@@ -66,7 +76,9 @@ export default function EnquiriesAdmin() {
               {s}
             </button>
           ))}
-          <button onClick={load} style={{ padding: '6px 12px', background: '#e2e8f0', border: 'none', borderRadius: 6, cursor: 'pointer' }}>🔄 Refresh</button>
+          <button onClick={load} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 12px', background: '#e2e8f0', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: '0.85rem' }}>
+            <FaSyncAlt /> Refresh
+          </button>
         </div>
       </div>
 
@@ -104,8 +116,14 @@ export default function EnquiriesAdmin() {
                     </td>
                     <td>
                       <strong style={{ color: '#0f3460', display: 'block' }}>{item.name}</strong>
-                      <a href={`tel:${item.phone}`} style={{ color: '#2563eb', fontSize: '0.85rem' }}>📞 {item.phone}</a>
-                      {item.email && <span style={{ display: 'block', fontSize: '0.78rem', color: '#64748b' }}>✉️ {item.email}</span>}
+                      <a href={`tel:${item.phone}`} style={{ color: '#2563eb', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                        <FaPhoneAlt style={{ fontSize: '0.75rem' }} /> {item.phone}
+                      </a>
+                      {item.email && (
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: '0.78rem', color: '#64748b', marginTop: 2 }}>
+                          <FaEnvelope style={{ fontSize: '0.75rem' }} /> {item.email}
+                        </span>
+                      )}
                     </td>
                     <td>
                       <span style={{ fontWeight: 600, fontSize: '0.88rem', color: '#334155' }}>{item.subject}</span>
@@ -122,10 +140,10 @@ export default function EnquiriesAdmin() {
                           href={waLink}
                           target="_blank"
                           rel="noreferrer"
-                          style={{ background: '#25d366', color: '#fff', padding: '4px 8px', borderRadius: 4, fontSize: '0.78rem', textDecoration: 'none', fontWeight: 600 }}
+                          style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: '#25d366', color: '#fff', padding: '4px 8px', borderRadius: 4, fontSize: '0.78rem', textDecoration: 'none', fontWeight: 600 }}
                           title="Open WhatsApp chat"
                         >
-                          💬 WhatsApp
+                          <FaWhatsapp style={{ fontSize: '0.85rem' }} /> WhatsApp
                         </a>
                         {item.status === 'unread' && (
                           <button
@@ -137,10 +155,10 @@ export default function EnquiriesAdmin() {
                         )}
                         <button
                           onClick={() => remove(item._id)}
-                          style={{ background: '#ef4444', color: '#fff', border: 'none', padding: '4px 8px', borderRadius: 4, fontSize: '0.78rem', cursor: 'pointer' }}
+                          style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#ef4444', color: '#fff', border: 'none', padding: '6px 8px', borderRadius: 4, fontSize: '0.78rem', cursor: 'pointer' }}
                           title="Delete enquiry"
                         >
-                          🗑️
+                          <FaTrashAlt />
                         </button>
                       </div>
                     </td>

@@ -1,6 +1,15 @@
 import { useEffect, useState, useRef } from 'react';
 import api from '../api/client';
 import { uploadImage, imageSrc } from '../api/upload';
+import {
+  FaChalkboardTeacher,
+  FaEdit,
+  FaPlus,
+  FaFileUpload,
+  FaGraduationCap,
+  FaHourglassHalf,
+  FaBookOpen
+} from 'react-icons/fa';
 
 export default function FacultyAdmin() {
   const [list, setList] = useState([]);
@@ -59,18 +68,23 @@ export default function FacultyAdmin() {
 
   return (
     <div style={{ maxWidth: 900 }}>
-      <h1 style={{ color: '#0f3460', marginBottom: 6 }}>👨‍🏫 Manage School Faculty</h1>
+      <h1 style={{ color: '#0f3460', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 10 }}>
+        <FaChalkboardTeacher style={{ color: '#1a56db' }} /> Manage School Faculty
+      </h1>
       <p style={{ color: '#666', marginBottom: 20, fontSize: '0.9rem' }}>Add &amp; edit faculty members with photo uploads, designation, experience, and qualification.</p>
 
       <form onSubmit={save} style={{ background: '#fff', padding: 24, borderRadius: 12, marginBottom: 28, boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}>
-        <h3 style={{ fontSize: '1rem', color: '#0f3460', marginBottom: 16 }}>{editId ? '✏️ Edit Faculty Member' : '➕ Add New Faculty Member'}</h3>
+        <h3 style={{ fontSize: '1rem', color: '#0f3460', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+          {editId ? <><FaEdit style={{ color: '#10b981' }} /> Edit Faculty Member</> : <><FaPlus style={{ color: '#1a56db' }} /> Add New Faculty Member</>}
+        </h3>
 
         {/* Photo Upload Section */}
         <div style={{ marginBottom: 16 }}>
           <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: 6, color: '#334155' }}>Faculty Photo</label>
           <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <label style={{ background: '#1a56db', color: '#fff', padding: '9px 16px', borderRadius: 8, fontSize: '0.85rem', fontWeight: 600, cursor: uploading ? 'wait' : 'pointer', display: 'inline-block' }}>
-              {uploading ? 'Uploading...' : '📁 Upload Photo'}
+            <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#1a56db', color: '#fff', padding: '9px 16px', borderRadius: 8, fontSize: '0.85rem', fontWeight: 600, cursor: uploading ? 'wait' : 'pointer' }}>
+              <FaFileUpload />
+              {uploading ? 'Uploading...' : 'Upload Photo'}
               <input ref={fileInputRef} type="file" accept="image/*" hidden disabled={uploading} onChange={onFileUpload} />
             </label>
             <input
@@ -138,10 +152,10 @@ export default function FacultyAdmin() {
             <div>
               <strong style={{ fontSize: '1.05rem', color: '#0f3460' }}>{f.name}</strong>
               <div style={{ fontSize: '0.88rem', color: '#1a56db', fontWeight: 600, marginTop: 2 }}>{f.designation || f.role}</div>
-              <div style={{ fontSize: '0.82rem', color: '#64748b', marginTop: 2 }}>
-                {f.qualification && <span>🎓 {f.qualification} · </span>}
-                {f.experience && <span>⏳ {f.experience} · </span>}
-                {f.subject && <span>📚 {f.subject}</span>}
+              <div style={{ fontSize: '0.82rem', color: '#64748b', marginTop: 4, display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+                {f.qualification && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><FaGraduationCap style={{ color: '#1a56db' }} /> {f.qualification}</span>}
+                {f.experience && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><FaHourglassHalf style={{ color: '#f59e0b' }} /> {f.experience}</span>}
+                {f.subject && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}><FaBookOpen style={{ color: '#10b981' }} /> {f.subject}</span>}
               </div>
             </div>
           </div>

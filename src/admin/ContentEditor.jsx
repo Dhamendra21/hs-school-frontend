@@ -1,6 +1,15 @@
 import { useEffect, useState, useRef } from 'react';
 import api from '../api/client';
 import { uploadImage, imageSrc } from '../api/upload';
+import {
+  FaFileUpload,
+  FaCrown,
+  FaGraduationCap,
+  FaBullseye,
+  FaImages,
+  FaCommentDots,
+  FaSchool
+} from 'react-icons/fa';
 
 const SECTIONS = [
   'popup', 'hero', 'site', 'highlights', 'about', 'why', 'academics',
@@ -43,20 +52,16 @@ export default function ContentEditor() {
     const [uploading, setUploading] = useState(false);
     const fileRef = useRef(null);
 
-    const addUrl = () => {
-      if (!url.trim()) return alert('Enter image URL');
-      setData([...list, { id: Date.now().toString(), image: url.trim() }]);
-      setUrl('');
-    };
-
     const addFile = async (e) => {
       const file = e.target.files?.[0];
       if (!file) return;
       setUploading(true);
       try {
         const res = await uploadImage(file);
-        setData([...list, { id: Date.now().toString(), image: res.url }]);
-        showMsg('Image uploaded');
+        const updatedList = [...list, { id: Date.now().toString(), image: res.url }];
+        setData(updatedList);
+        await save(updatedList);
+        showMsg('Image uploaded and hero saved!');
       } catch (err) {
         alert(err.response?.data?.error || err.message || 'Upload failed');
       } finally {
@@ -65,9 +70,21 @@ export default function ContentEditor() {
       }
     };
 
-    const remove = (i) => {
+    const addUrl = async () => {
+      if (!url.trim()) return alert('Enter image URL');
+      const updatedList = [...list, { id: Date.now().toString(), image: url.trim() }];
+      setData(updatedList);
+      setUrl('');
+      await save(updatedList);
+      showMsg('Image URL added and hero saved!');
+    };
+
+    const remove = async (i) => {
       if (!confirm('Remove this image?')) return;
-      setData(list.filter((_, idx) => idx !== i));
+      const updatedList = list.filter((_, idx) => idx !== i);
+      setData(updatedList);
+      await save(updatedList);
+      showMsg('Image removed and hero updated!');
     };
 
     return (
@@ -76,8 +93,9 @@ export default function ContentEditor() {
           Hero is <strong>image only</strong>. Upload files or paste URLs, then Save.
         </p>
         <div style={{ display: 'flex', gap: 8, marginBottom: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-          <label style={{ ...btnStyle('#28a745'), display: 'inline-block', cursor: uploading ? 'wait' : 'pointer' }}>
-            {uploading ? 'Uploading...' : '📁 Upload Image'}
+          <label style={{ ...btnStyle('#28a745'), display: 'inline-flex', alignItems: 'center', gap: 6, cursor: uploading ? 'wait' : 'pointer' }}>
+            <FaFileUpload />
+            {uploading ? 'Uploading...' : 'Upload Image'}
             <input ref={fileRef} type="file" accept="image/*" hidden disabled={uploading} onChange={addFile} />
           </label>
           <span style={{ color: '#999' }}>or</span>
@@ -149,8 +167,9 @@ export default function ContentEditor() {
         <div style={{ marginBottom: 12 }}>
           <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: 6 }}>Image (optional)</label>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-            <label style={{ ...btnStyle('#28a745'), display: 'inline-block', cursor: uploading ? 'wait' : 'pointer', fontSize: '0.85rem' }}>
-              {uploading ? 'Uploading...' : '📁 Upload'}
+            <label style={{ ...btnStyle('#28a745'), display: 'inline-flex', alignItems: 'center', gap: 6, cursor: uploading ? 'wait' : 'pointer', fontSize: '0.85rem' }}>
+              <FaFileUpload />
+              {uploading ? 'Uploading...' : 'Upload'}
               <input ref={fileRef} type="file" accept="image/*" hidden disabled={uploading} onChange={onFile} />
             </label>
             <input
@@ -221,7 +240,9 @@ export default function ContentEditor() {
         </p>
         <Field label="School Title" value={form.title || ''} onChange={(v) => set('title', v)} />
         
-        <h3 style={{ marginTop: 20, marginBottom: 12, color: '#0f3460', fontSize: '1rem' }}>👑 Chairman Details</h3>
+        <h3 style={{ marginTop: 20, marginBottom: 12, color: '#0f3460', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <FaCrown style={{ color: '#d97706' }} /> Chairman Details
+        </h3>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 80px', gap: 10 }}>
           <Field label="Chairman Name" value={form.chairmanName || 'Shri Sushil Shukla'} onChange={(v) => set('chairmanName', v)} />
           <Field label="Chairman Role" value={form.chairmanRole || 'Chairman'} onChange={(v) => set('chairmanRole', v)} />
@@ -230,8 +251,9 @@ export default function ContentEditor() {
         <div style={{ marginBottom: 16 }}>
           <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: 6 }}>Chairman Picture (optional)</label>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-            <label style={{ ...btnStyle('#28a745'), display: 'inline-block', cursor: uploadingChairman ? 'wait' : 'pointer', fontSize: '0.85rem' }}>
-              {uploadingChairman ? 'Uploading...' : '📁 Upload Picture'}
+            <label style={{ ...btnStyle('#28a745'), display: 'inline-flex', alignItems: 'center', gap: 6, cursor: uploadingChairman ? 'wait' : 'pointer', fontSize: '0.85rem' }}>
+              <FaFileUpload />
+              {uploadingChairman ? 'Uploading...' : 'Upload Picture'}
               <input ref={chairmanFileRef} type="file" accept="image/*" hidden disabled={uploadingChairman} onChange={onChairmanFile} />
             </label>
             <input
@@ -250,7 +272,9 @@ export default function ContentEditor() {
         </div>
         <Field label="Chairman Message" value={form.chairmanMessage || ''} onChange={(v) => set('chairmanMessage', v)} textarea />
 
-        <h3 style={{ marginTop: 24, marginBottom: 12, color: '#0f3460', fontSize: '1rem' }}>🎓 Principal Details</h3>
+        <h3 style={{ marginTop: 24, marginBottom: 12, color: '#0f3460', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <FaGraduationCap style={{ color: '#1a56db' }} /> Principal Details
+        </h3>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 80px', gap: 10 }}>
           <Field label="Principal Name" value={form.principalName || 'Mrs. Tripati Shrivastava'} onChange={(v) => set('principalName', v)} />
           <Field label="Principal Role" value={form.principalRole || 'Principal'} onChange={(v) => set('principalRole', v)} />
@@ -259,8 +283,9 @@ export default function ContentEditor() {
         <div style={{ marginBottom: 16 }}>
           <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 500, marginBottom: 6 }}>Principal Picture (optional)</label>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-            <label style={{ ...btnStyle('#28a745'), display: 'inline-block', cursor: uploadingPrincipal ? 'wait' : 'pointer', fontSize: '0.85rem' }}>
-              {uploadingPrincipal ? 'Uploading...' : '📁 Upload Picture'}
+            <label style={{ ...btnStyle('#28a745'), display: 'inline-flex', alignItems: 'center', gap: 6, cursor: uploadingPrincipal ? 'wait' : 'pointer', fontSize: '0.85rem' }}>
+              <FaFileUpload />
+              {uploadingPrincipal ? 'Uploading...' : 'Upload Picture'}
               <input ref={principalFileRef} type="file" accept="image/*" hidden disabled={uploadingPrincipal} onChange={onPrincipalFile} />
             </label>
             <input
@@ -279,7 +304,9 @@ export default function ContentEditor() {
         </div>
         <Field label="Principal Message" value={form.principalMessage || ''} onChange={(v) => set('principalMessage', v)} textarea />
 
-        <h3 style={{ marginTop: 24, marginBottom: 12, color: '#0f3460', fontSize: '1rem' }}>🎯 Mission, Vision &amp; Values</h3>
+        <h3 style={{ marginTop: 24, marginBottom: 12, color: '#0f3460', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <FaBullseye style={{ color: '#ef4444' }} /> Mission, Vision &amp; Values
+        </h3>
         <Field label="Mission" value={form.mission || ''} onChange={(v) => set('mission', v)} textarea />
         <Field label="Vision" value={form.vision || ''} onChange={(v) => set('vision', v)} textarea />
         <Field label="Values" value={form.values || ''} onChange={(v) => set('values', v)} textarea />
@@ -329,6 +356,9 @@ export default function ContentEditor() {
             type="button"
             onClick={() => setSection(s)}
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
               padding: '8px 14px',
               borderRadius: 8,
               border: '1px solid #dde1e7',
@@ -340,7 +370,7 @@ export default function ContentEditor() {
               fontWeight: 500
             }}
           >
-            {s === 'hero' ? '🖼️ Hero Images' : s === 'popup' ? '💬 Popup' : s === 'about' ? '🏫 About & Leadership' : s}
+            {s === 'hero' ? <><FaImages /> Hero Images</> : s === 'popup' ? <><FaCommentDots /> Popup</> : s === 'about' ? <><FaSchool /> About &amp; Leadership</> : s}
           </button>
         ))}
       </div>

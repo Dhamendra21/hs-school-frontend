@@ -1,6 +1,20 @@
 import { useEffect, useState, useRef } from 'react';
 import api from '../api/client';
 import { uploadImage, imageSrc } from '../api/upload';
+import {
+  FaBullhorn,
+  FaSyncAlt,
+  FaEdit,
+  FaPlus,
+  FaFilePdf,
+  FaImage,
+  FaPaperclip,
+  FaEye,
+  FaSave,
+  FaExternalLinkAlt,
+  FaTrashAlt,
+  FaSpinner
+} from 'react-icons/fa';
 
 export default function NoticesAdmin() {
   const [list, setList] = useState([]);
@@ -108,14 +122,16 @@ export default function NoticesAdmin() {
     <div style={{ maxWidth: 900, margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <div>
-          <h1 style={{ color: '#0f3460', fontSize: '1.6rem', marginBottom: 4 }}>📢 Notices & Announcements Portal</h1>
+          <h1 style={{ color: '#0f3460', fontSize: '1.6rem', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 10 }}>
+            <FaBullhorn style={{ color: '#f59e0b' }} /> Notices & Announcements Portal
+          </h1>
           <p style={{ color: '#64748b', fontSize: '0.9rem' }}>Post official school notices with attached PDF circulars or image banners.</p>
         </div>
         <button
           onClick={load}
-          style={{ background: '#f1f5f9', border: '1px solid #cbd5e1', padding: '8px 16px', borderRadius: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#f1f5f9', border: '1px solid #cbd5e1', padding: '8px 16px', borderRadius: 8, fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}
         >
-          🔄 Refresh Notices
+          <FaSyncAlt /> Refresh Notices
         </button>
       </div>
 
@@ -123,7 +139,7 @@ export default function NoticesAdmin() {
       <form onSubmit={save} style={{ background: '#fff', padding: 24, borderRadius: 14, marginBottom: 32, boxShadow: '0 4px 20px rgba(0,0,0,0.06)', border: '1px solid #e2e8f0' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18, borderBottom: '1px solid #f1f5f9', paddingBottom: 12 }}>
           <h3 style={{ fontSize: '1.1rem', color: '#0f3460', display: 'flex', alignItems: 'center', gap: 8 }}>
-            {editId ? '✏️ Edit Notice Entry' : '➕ Create & Publish New Notice'}
+            {editId ? <><FaEdit style={{ color: '#10b981' }} /> Edit Notice Entry</> : <><FaPlus style={{ color: '#1a56db' }} /> Create & Publish New Notice</>}
           </h3>
           {editId && (
             <span style={{ background: '#fef3c7', color: '#92400e', fontSize: '0.78rem', fontWeight: 700, padding: '3px 10px', borderRadius: 6 }}>
@@ -175,8 +191,8 @@ export default function NoticesAdmin() {
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12, flexWrap: 'wrap', gap: 10 }}>
             <div>
-              <strong style={{ fontSize: '0.92rem', color: '#0f3460', display: 'block' }}>
-                📄 Attach PDF Circular or 🖼️ Image Banner (Optional)
+              <strong style={{ fontSize: '0.92rem', color: '#0f3460', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <FaFilePdf style={{ color: '#ef4444' }} /> Attach PDF Circular or <FaImage style={{ color: '#1a56db' }} /> Image Banner (Optional)
               </strong>
               <span style={{ fontSize: '0.8rem', color: '#64748b' }}>
                 Upload PDF circulars, exam datesheets, or poster images up to 15 MB.
@@ -184,7 +200,7 @@ export default function NoticesAdmin() {
             </div>
 
             <label style={{ background: '#1a56db', color: '#fff', padding: '10px 20px', borderRadius: 8, fontSize: '0.88rem', fontWeight: 600, cursor: uploading ? 'wait' : 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8, boxShadow: '0 2px 8px rgba(26, 86, 219, 0.25)' }}>
-              {uploading ? '⏳ Uploading...' : '📎 Select File to Upload'}
+              {uploading ? <><FaSpinner className="spin" /> Uploading...</> : <><FaPaperclip /> Select File to Upload</>}
               <input ref={fileInputRef} type="file" accept="application/pdf,image/*" hidden disabled={uploading} onChange={onFileChange} />
             </label>
           </div>
@@ -217,7 +233,9 @@ export default function NoticesAdmin() {
           {attachment && (
             <div style={{ marginTop: 14, background: '#fff', padding: 14, borderRadius: 10, border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                <span style={{ fontSize: '2rem' }}>{attachmentType === 'pdf' ? '📄' : '🖼️'}</span>
+                <span style={{ fontSize: '1.8rem', color: attachmentType === 'pdf' ? '#ef4444' : '#1a56db' }}>
+                  {attachmentType === 'pdf' ? <FaFilePdf /> : <FaImage />}
+                </span>
                 <div>
                   <strong style={{ fontSize: '0.9rem', color: '#0f3460', display: 'block' }}>
                     {attachmentType === 'pdf' ? 'PDF Document Attached' : 'Image Banner Attached'}
@@ -231,9 +249,9 @@ export default function NoticesAdmin() {
                   href={imageSrc(attachment)}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ background: '#e0f2fe', color: '#0369a1', padding: '6px 14px', borderRadius: 6, fontSize: '0.82rem', fontWeight: 600, textDecoration: 'none' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#e0f2fe', color: '#0369a1', padding: '6px 14px', borderRadius: 6, fontSize: '0.82rem', fontWeight: 600, textDecoration: 'none' }}
                 >
-                  👁️ Preview Link
+                  <FaEye /> Preview Link
                 </a>
               </div>
             </div>
@@ -246,6 +264,9 @@ export default function NoticesAdmin() {
             type="submit"
             disabled={uploading}
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
               padding: '12px 28px',
               background: '#0f3460',
               color: '#fff',
@@ -257,7 +278,7 @@ export default function NoticesAdmin() {
               boxShadow: '0 4px 12px rgba(15, 52, 96, 0.2)'
             }}
           >
-            {editId ? '💾 Save Changes' : '📢 Publish Notice'}
+            {editId ? <><FaSave /> Save Changes</> : <><FaBullhorn /> Publish Notice</>}
           </button>
           {editId && (
             <button
@@ -300,11 +321,11 @@ export default function NoticesAdmin() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6, flexWrap: 'wrap' }}>
                     <strong style={{ fontSize: '1.05rem', color: '#0f3460' }}>{n.title}</strong>
                     <span style={{ fontSize: '0.78rem', background: '#e0f2fe', color: '#0369a1', padding: '2px 8px', borderRadius: 4, fontWeight: 600 }}>
-                      📅 {n.date}
+                      {n.date}
                     </span>
                     {hasAtt && (
-                      <span style={{ background: isPdf ? '#fee2e2' : '#dbeafe', color: isPdf ? '#991b1b' : '#1e40af', padding: '2px 8px', borderRadius: 4, fontSize: '0.75rem', fontWeight: 700 }}>
-                        {isPdf ? '📄 PDF ATTACHED' : '🖼️ IMAGE ATTACHED'}
+                      <span style={{ background: isPdf ? '#fee2e2' : '#dbeafe', color: isPdf ? '#991b1b' : '#1e40af', padding: '2px 8px', borderRadius: 4, fontSize: '0.75rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                        {isPdf ? <><FaFilePdf /> PDF ATTACHED</> : <><FaImage /> IMAGE ATTACHED</>}
                       </span>
                     )}
                   </div>
@@ -326,10 +347,10 @@ export default function NoticesAdmin() {
                           textDecoration: 'none',
                           display: 'inline-flex',
                           alignItems: 'center',
-                          gap: 4
+                          gap: 6
                         }}
                       >
-                        🔗 Open Attached File ↗
+                        <FaExternalLinkAlt /> Open Attached File ↗
                       </a>
                     </div>
                   )}
@@ -338,15 +359,15 @@ export default function NoticesAdmin() {
                 <div style={{ display: 'flex', gap: 8 }}>
                   <button
                     onClick={() => startEdit(n)}
-                    style={{ padding: '7px 14px', background: '#10b981', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: '0.82rem' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '7px 14px', background: '#10b981', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: '0.82rem' }}
                   >
-                    ✏️ Edit
+                    <FaEdit /> Edit
                   </button>
                   <button
                     onClick={() => del(n._id)}
-                    style={{ padding: '7px 14px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: '0.82rem' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '7px 14px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 600, fontSize: '0.82rem' }}
                   >
-                    🗑️ Delete
+                    <FaTrashAlt /> Delete
                   </button>
                 </div>
               </div>

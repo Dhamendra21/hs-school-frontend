@@ -1,14 +1,25 @@
 import { Link, NavLink, Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import {
+  FaTachometerAlt,
+  FaEnvelopeOpenText,
+  FaEdit,
+  FaBullhorn,
+  FaChalkboardTeacher,
+  FaImages,
+  FaCog,
+  FaGlobe,
+  FaSignOutAlt
+} from 'react-icons/fa';
 
 const links = [
-  { to: '/admin', label: '📊 Dashboard', end: true },
-  { to: '/admin/enquiries', label: '📩 Admission Enquiries' },
-  { to: '/admin/content', label: '✏️ Website Content' },
-  { to: '/admin/notices', label: '📢 Notices / News' },
-  { to: '/admin/faculty', label: '👨‍🏫 Faculty' },
-  { to: '/admin/gallery', label: '🖼️ Gallery' },
-  { to: '/admin/settings', label: '⚙️ Settings' }
+  { to: '/admin', label: 'Dashboard', icon: FaTachometerAlt, end: true },
+  { to: '/admin/enquiries', label: 'Admission Enquiries', icon: FaEnvelopeOpenText },
+  { to: '/admin/content', label: 'Website Content', icon: FaEdit },
+  { to: '/admin/notices', label: 'Notices / News', icon: FaBullhorn },
+  { to: '/admin/faculty', label: 'Faculty', icon: FaChalkboardTeacher },
+  { to: '/admin/gallery', label: 'Gallery', icon: FaImages },
+  { to: '/admin/settings', label: 'Settings', icon: FaCog }
 ];
 
 export default function AdminLayout() {
@@ -27,23 +38,46 @@ export default function AdminLayout() {
           </div>
         </div>
         <nav>
-          {links.map((l) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              end={l.end}
-              style={({ isActive }) => ({
-                display: 'block', padding: '12px 20px', color: isActive ? '#fff' : 'rgba(255,255,255,0.8)',
-                background: isActive ? 'rgba(255,255,255,0.1)' : 'transparent',
-                borderLeft: isActive ? '3px solid #e94560' : '3px solid transparent',
-                textDecoration: 'none', fontSize: '0.95rem'
-              })}
-            >
-              {l.label}
-            </NavLink>
-          ))}
-          <a href="/" target="_blank" rel="noreferrer" style={{ display: 'block', padding: '12px 20px', color: 'rgba(255,255,255,0.8)', textDecoration: 'none' }}>🌐 View Website</a>
-          <button onClick={logout} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '12px 20px', background: 'none', border: 'none', borderTop: '1px solid rgba(255,255,255,0.1)', marginTop: 20, color: 'rgba(255,255,255,0.8)', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.95rem' }}>🚪 Logout</button>
+          {links.map((l) => {
+            const Icon = l.icon;
+            return (
+              <NavLink
+                key={l.to}
+                to={l.to}
+                end={l.end}
+                style={({ isActive }) => ({
+                  display: 'flex', alignItems: 'center', gap: 12, padding: '12px 20px', color: isActive ? '#fff' : 'rgba(255,255,255,0.8)',
+                  background: isActive ? 'rgba(255,255,255,0.1)' : 'transparent',
+                  borderLeft: isActive ? '3px solid #e94560' : '3px solid transparent',
+                  textDecoration: 'none', fontSize: '0.95rem'
+                })}
+              >
+                <Icon style={{ fontSize: '1.05rem', flexShrink: 0 }} />
+                <span>{l.label}</span>
+              </NavLink>
+            );
+          })}
+          <a
+            href="/"
+            target="_blank"
+            rel="noreferrer"
+            style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 20px', color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.95rem' }}
+          >
+            <FaGlobe style={{ fontSize: '1.05rem', flexShrink: 0 }} />
+            <span>View Website</span>
+          </a>
+          <button
+            onClick={logout}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 12, width: '100%', textAlign: 'left',
+              padding: '12px 20px', background: 'none', border: 'none',
+              borderTop: '1px solid rgba(255,255,255,0.1)', marginTop: 20,
+              color: 'rgba(255,255,255,0.8)', cursor: 'pointer', fontFamily: 'inherit', fontSize: '0.95rem'
+            }}
+          >
+            <FaSignOutAlt style={{ fontSize: '1.05rem', flexShrink: 0 }} />
+            <span>Logout</span>
+          </button>
         </nav>
       </aside>
       <main style={{ flex: 1, padding: 30, background: '#f0f2f5' }}>

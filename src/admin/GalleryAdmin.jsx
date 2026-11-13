@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import api from '../api/client';
 import { imageSrc } from '../api/upload';
+import { FaFileUpload, FaLink, FaImages } from 'react-icons/fa';
 
 export default function GalleryAdmin() {
   const [list, setList] = useState([]);
@@ -60,12 +61,18 @@ export default function GalleryAdmin() {
 
   return (
     <div>
-      <h1 style={{ color: '#0f3460', marginBottom: 20 }}>Gallery</h1>
+      <h1 style={{ color: '#0f3460', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
+        <FaImages style={{ color: '#8b5cf6' }} /> Gallery Management
+      </h1>
 
       <form onSubmit={add} style={{ background: '#fff', padding: 24, borderRadius: 12, marginBottom: 24 }}>
         <div style={{ display: 'flex', gap: 10, marginBottom: 16 }}>
-          <button type="button" onClick={() => setMode('file')} style={tabBtn(mode === 'file')}>📁 Upload File</button>
-          <button type="button" onClick={() => setMode('url')} style={tabBtn(mode === 'url')}>🔗 Image URL</button>
+          <button type="button" onClick={() => setMode('file')} style={{ ...tabBtn(mode === 'file'), display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            <FaFileUpload /> Upload File
+          </button>
+          <button type="button" onClick={() => setMode('url')} style={{ ...tabBtn(mode === 'url'), display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            <FaLink /> Image URL
+          </button>
         </div>
 
         {mode === 'file' ? (
